@@ -65,7 +65,7 @@ Send a message with a SQL query in:
 {
   "q": "SELECT * FROM tanque LIMIT 10"
 }
-
+```
 
 # Node-RED example:
 
