@@ -1,0 +1,36 @@
+{
+  "name": "node-red-contrib-influxdb3-read",
+  "version": "1.0.0",
+  "description": "A Node-RED node for executing SQL queries against InfluxDB 3 using the HTTP API.",
+  "keywords": [
+    "node-red",
+    "influxdb",
+    "influxdb3",
+    "query",
+    "sql",
+    "timeseries",
+    "database"
+  ],
+  "repository": { 
+    "type": "git",
+    "url": "https://github.com/DanielVickG87/node-red-contrib-influxdb3-read.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DanielVickG87/node-red-contrib-influxdb3-read/issues"
+  },
+  "homepage": "https://github.com/DanielVickG87/node-red-contrib-influxdb3-read#readme",
+  "author": "Daniel Vick",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "node-red": {
+    "version": ">=3.0.0",
+    "nodes": {
+      "influxdb3-read": "influxdb3-read.js"
+    }
+  },
+  "dependencies": {}
+}
+

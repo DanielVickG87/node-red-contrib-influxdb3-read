@@ -1,0 +1,71 @@
+[
+    {
+        "id": "a60d5d17bb1d7c13",
+        "type": "influxdb3-read",
+        "z": "0e7e430cd0c228c7",
+        "host": "http://localhost:8181",
+        "token": "apiv3_....",
+        "database": "dn_name",
+        "query": "SELECT * FROM tanque WHERE time >= now() - interval '60 minutes' AND sensor IN ('ultrasonico')",
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "603c6a3bee2ba110"
+            ]
+        ]
+    },
+    {
+        "id": "f142103d6fc2fd2e",
+        "type": "inject",
+        "z": "0e7e430cd0c228c7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "a60d5d17bb1d7c13"
+            ]
+        ]
+    },
+    {
+        "id": "603c6a3bee2ba110",
+        "type": "debug",
+        "z": "0e7e430cd0c228c7",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0e24ef2851a2d825",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb3-read": "1.0.0"
+        }
+    }
+]
