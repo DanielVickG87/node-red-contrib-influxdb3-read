@@ -65,7 +65,9 @@ Send a message with a SQL query in:
 {
   "q": "SELECT * FROM tanque LIMIT 10"
 }
+```
 
+---
 
 # Node-RED example:
 
@@ -73,6 +75,8 @@ msg.payload = {
   q: "SELECT * FROM tanque WHERE sensor = 'ultrasonico'"
 };
 return msg;
+
+---
 
 ## 📤 Output Format
 
@@ -83,6 +87,8 @@ The result is returned inside:
     "results": [...]
   }
 }
+
+---
 
 ## 📚 Example Flows
 1. Read last 5 minutes of data
@@ -102,6 +108,8 @@ msg.payload = {
   q: "SELECT time, value FROM tanque ORDER BY time DESC LIMIT 20"
 };
 return msg;
+
+---
 
 ## 🛠 Development
 
@@ -124,11 +132,15 @@ npm link node-red-contrib-influxdb3-read
 
 Restart Node-RED.
 
+---
+
 ## 🐛 Issues
 
 Report bugs at:
 
 https://github.com/DanielVickG87/node-red-contrib-influxdb3-read/issues
+
+---
 
 ## 📜 License
 
