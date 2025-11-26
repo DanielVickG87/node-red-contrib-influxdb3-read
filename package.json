@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-influxdb3-read",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A Node-RED node for executing SQL queries against InfluxDB 3 using the HTTP API.",
   "keywords": [
     "node-red",
