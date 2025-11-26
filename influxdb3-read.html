@@ -40,3 +40,97 @@
     });
 </script>
 
+<script type="text/x-red" data-help-name="influxdb3-read">
+
+    <h2>InfluxDB 3 Read</h2>
+
+    <p>
+        This node allows you to execute <strong>SQL queries</strong> against an InfluxDB 3.x
+        database using the REST API (<code>/api/v3/query_sql</code>).  
+        It supports authentication with <b>Bearer Tokens</b> and returns the query results
+        inside <code>msg.payload</code>.
+    </p>
+
+    <h3>Configuration</h3>
+
+    <ul>
+        <li><b>Host</b>: URL of your InfluxDB 3 server, e.g. <code>http://localhost:8181</code>.</li>
+        <li><b>Token</b>: Your InfluxDB API token.</li>
+        <li><b>Database</b>: Target database name (ex: <code>testdb2</code>).</li>
+        <li><b>Namespace</b>: Typically <code>default</code> unless using multi-tenant environments.</li>
+        <li><b>Query</b>: The SQL query to be executed.</li>
+    </ul>
+
+    <h3>Input</h3>
+
+    <p>
+        The node can also accept a dynamic query using:
+    </p>
+
+    <pre><code>msg.query = "SELECT * FROM my_table";</code></pre>
+
+    <p>
+        The node will prioritize:
+        <br>1. <b>msg.query</b> (if provided)
+        <br>2. The query defined in the node configuration
+    </p>
+
+    <h3>Output</h3>
+
+    <p>
+        Successful queries return:
+    </p>
+
+    <pre><code>msg.payload = [
+  { time: "...", sensor: "ultrasonico", value: 123.4 },
+  { time: "...", sensor: "ultrasonico", value: 124.1 },
+  ...
+];</code></pre>
+
+    <p>In case of errors:</p>
+
+    <pre><code>msg.error = "Query failed: ..."</code></pre>
+
+    <h3>Examples</h3>
+
+    <p><b>Example 1 – Basic query</b></p>
+    <pre><code>SELECT * FROM tanque;</code></pre>
+
+    <p><b>Example 2 – Filtering by measurement</b></p>
+    <pre><code>SELECT * FROM tanque WHERE sensor = 'ultrasonico';</code></pre>
+
+    <p><b>Example 3 – Last 5 minutes</b></p>
+    <pre><code>SELECT *
+FROM tanque
+WHERE time >= now() - interval '5 minutes';</code></pre>
+
+    <p><b>Example 4 – Send dynamic query from Function Node</b></p>
+    <pre><code>msg.query = `
+  SELECT value
+  FROM tanque
+  WHERE sensor = 'ultrasonico'
+  ORDER BY time DESC
+  LIMIT 10
+`;
+return msg;</code></pre>
+
+    <h3>Docker Notes</h3>
+
+    <ul>
+        <li>If Node-RED is running locally → use <code>http://localhost:8181</code></li>
+        <li>If Node-RED is in Docker → use <code>http://host.docker.internal:8181</code></li>
+        <li>If both services run inside Docker → use the service name (ex: <code>http://influxdb:8181</code>)</li>
+    </ul>
+
+    <h3>Troubleshooting</h3>
+
+    <p><b>“Authorization header was malformed”</b><br>
+    Check that the token starts with <code>Bearer </code>.</p>
+
+    <p><b>“fetch is not a function”</b><br>
+    Ensure your node module includes <code>node-fetch@2</code> and requires it correctly inside the JS file.</p>
+
+    <p><b>Timeout / ETIMEDOUT</b><br>
+    Verify the correct host, port, and Docker network connectivity.</p>
+
+</script>
